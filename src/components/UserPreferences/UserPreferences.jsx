@@ -9,7 +9,6 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import PropTypes from 'prop-types';
 
 
-
 class preferences extends Component {
 
     state = {
@@ -25,7 +24,6 @@ class preferences extends Component {
         10: false,
         11: false,
         12: false,
-
     }
 
     componentDidMount() {
@@ -34,7 +32,14 @@ class preferences extends Component {
         })
     }
     submit = () => {
-        console.log('you clicked the button', this.state)
+        const trueValues = []
+        const entries = Object.entries(this.state)
+        for (const [id, value] of entries) {
+            if (value == true) {
+         trueValues.push([id])
+             }
+        }
+        console.log(trueValues)
     }
     handleChange = name => event => {
         console.log('in handle change', name)
