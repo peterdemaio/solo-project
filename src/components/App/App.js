@@ -16,6 +16,10 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+import UserPreferences from '../UserPreferences/UserPreferences'
+import Search from '../SearchPage/SearchPage'
+import Favorites from '../Favorites/Favorites'
+import FeelingHungry from '../FeelingHungry/FeelingHungry'
 
 import './App.css';
 
@@ -39,6 +43,11 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
+            <Route
+              exact
+              path="/search"
+              component={Search}
+            />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -48,12 +57,27 @@ class App extends Component {
               path="/home"
               component={UserPage}
             />
+            <ProtectedRoute
+              exact
+              path="/preferences"
+              component={UserPreferences}
+            />
+             <ProtectedRoute
+              exact
+              path="/feelinghungry"
+              component={FeelingHungry}
+            />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             <ProtectedRoute
               exact
               path="/info"
               component={InfoPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/favorites"
+              component={Favorites}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

@@ -18,6 +18,7 @@ class LoginPage extends Component {
           password: this.state.password,
         },
       });
+
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
@@ -70,6 +71,7 @@ class LoginPage extends Component {
               type="submit"
               name="submit"
               value="Log In"
+              to="/preferences"
             />
           </div>
         </form>
