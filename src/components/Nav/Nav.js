@@ -16,9 +16,6 @@ const Nav = (props) => (
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? 'Home' : 'Login / Register'}
       </Link>
-      <Link className="nav-link" to="/search">
-            Search
-          </Link>
       <Link className="nav-link" to="/about">
         About
       </Link>
@@ -28,7 +25,9 @@ const Nav = (props) => (
         <Link className="nav-link" to="/favorites">
             Favorites
           </Link>
-          
+          <Link className="nav-link" to="/search">
+            Search
+          </Link>
           <Link className="nav-link" to="/feelinghungry">
             Feeling Hungry
           </Link>

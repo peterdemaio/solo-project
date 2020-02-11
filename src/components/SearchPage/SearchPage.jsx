@@ -1,25 +1,34 @@
 import React, { Component} from 'react';
+import { connect } from 'react-redux'
 
 class Search extends Component {
 
-    // Get preferences upon page load and keep them in state
+
+    componentDidMount() {
+        console.log(this.props.reduxStore.user.id)
+        this.props.dispatch({
+            type: 'GET_USER_PREFERENCES',
+            payload: this.props.reduxStore.user
+        })
+    }
 
     state = {
         queryText: '',
-        preferences: ''
     }
 
     handleSearch = (event) => {
         this.setState({
-            ...this.state,
             queryText: event.target.value
         })
+        console.log(this.state.queryText)
     }
 
     handleClick = () => {
         this.props.dispatch({
             type: 'SEARCH',
-            payload: this.state.queryText
+            payload: {query: this.state.queryText,
+                    preferences: this.props.reduxStore.preferencesMaster.userPreferences
+            }
         })
     }
     render() {
@@ -33,4 +42,8 @@ class Search extends Component {
 
 };
 
-export default Search;
+const mapStateToProps = (reduxStore) => ({
+    reduxStore
+  })
+
+export default connect(mapStateToProps)(Search);

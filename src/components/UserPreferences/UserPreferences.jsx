@@ -5,8 +5,6 @@ import { FormControlLabel } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import PropTypes from 'prop-types';
 
 
 class preferences extends Component {
@@ -28,7 +26,7 @@ class preferences extends Component {
 
     componentDidMount() {
         this.props.dispatch({
-            type: 'GET_PREFERENCES_MASTER'
+            type: 'GET_PREFERENCES_MASTER',
         })
     }
     submit = () => {
@@ -36,10 +34,14 @@ class preferences extends Component {
         const entries = Object.entries(this.state)
         for (const [id, value] of entries) {
             if (value == true) {
-         trueValues.push([id])
+         trueValues.push(id)
              }
         }
-        console.log(trueValues)
+        this.props.dispatch({
+            type: 'SET_PREFERENCES',
+            payload: trueValues
+        })
+        this.props.history.push('/home')
     }
     handleChange = name => event => {
         console.log('in handle change', name)
@@ -59,7 +61,7 @@ class preferences extends Component {
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Select a Preference</FormLabel>
                     <FormGroup>
-                        {this.props.reduxState.preferencesMaster.map(preference => (
+                        {this.props.reduxState.preferencesMaster.preferencesMaster.map(preference => (
                             <FormControlLabel
                                 control={
                                     <Checkbox

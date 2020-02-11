@@ -20,7 +20,17 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
+    let array = req.body
+    let queryText = ''
+    // Add post route here using join table for user and preferences
+    for (let item of array) {
+        queryText = `INSERT INTO "user_health" ("user_id", "health_id") VALUES (${req.user.id}, ${item})`
+        console.log(queryText)
+        pool.query(queryText)
+        .then( () => {
 
+        })
+    }
 });
 
 module.exports = router;
