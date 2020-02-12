@@ -19,8 +19,12 @@ function* fireSearch(action) {
     }
     console.log(`/search/?query=${query}${text}`)
     // yield console.log(`READY TO SEARCH FOR ${query} and ${prefString}`  )
-    // let response = yield axios.get(`/search/?query=${query}&preferences=${prefString}`)
-    // yield console.log(response.data)
+    let response = yield axios.get(`/search/?q=${query}&health=${text}`)
+    yield console.log(response.data.hits)
+    yield put ({
+        type: 'SET_RECIPES',
+        payload: response.data.hits
+        })
 }
 
 export default searchSaga
