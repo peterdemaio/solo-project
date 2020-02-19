@@ -1,0 +1,24 @@
+.notesTextArea {
+    height: 100px;
+    width: 200px;
+    font-size: 16px;
+}
+
+.notesSection {
+    background-color: gold;
+    font-weight: bold;
+}
+.ingredientsListItem {
+    font-size: 24px;
+}
+.ingredientsListItem:before {
+    content: '\1F32E';
+    margin-left: -20px;
+    margin-right: 10px;
+    list-style-type: none;
+    font-size: 24px;
+}
+
+.cardHeader {
+    background-color: #ffff52;
+}

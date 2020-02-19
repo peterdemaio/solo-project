@@ -1,0 +1,49 @@
+.nav-title {
+    font-size: 54px;
+    font-weight: 700;
+    float: left;
+    color: black;
+    padding-left: 10px;
+    font-style: italic;
+    box-shadow: 0 0 25px 0 black;
+    margin-left: 30px;
+    margin-top: 40px;
+    background-color: gold;
+}
+
+.nav {
+  overflow: hidden;
+  box-shadow: 0 0 25px 0 black;
+  margin-bottom: 0px;
+  background-image: url('../../taco.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.nav-link {
+  float: left;
+  color: black;
+  background-color: gold;
+  box-shadow: 0 0 25px 0 black;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-size: 24px;
+  margin-top:110px;
+
+  /* these last two make the logout button in
+  the nav bar look like another link */
+  border:none;
+  cursor: pointer;
+  outline:0;
+}
+
+.nav-link:hover {
+  background-color: #c7a600 
+}
+
+.nav-right {
+  float: right;
+  overflow: auto;
+}

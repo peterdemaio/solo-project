@@ -1,0 +1,14 @@
+.ingredientsListItem {
+    font-size: 24px;
+}
+.ingredientsListItem:before {
+    list-style-type: none;
+    content: '\1F32E';
+    margin-left: -20px;
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.cardHeader {
+    background-color:gold;
+}
