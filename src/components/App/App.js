@@ -13,7 +13,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import Search from '../SearchPage/SearchPage'
 import Favorites from '../Favorites/Favorites'
-import FeelingHungry from '../FeelingHungry/FeelingHungry'
+import MealPlan from '../MealPlan/MealPlan'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import blue from '@material-ui/core/colors/blue'
@@ -73,8 +73,8 @@ class App extends Component {
               />
               <ProtectedRoute
                 exact
-                path="/feelinghungry"
-                component={FeelingHungry}
+                path="/mealplan"
+                component={MealPlan}
               />
               {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}

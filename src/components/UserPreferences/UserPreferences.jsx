@@ -23,7 +23,7 @@ class preferences extends Component {
         return (
             <div className = "preferenceList">
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Select a Preference</FormLabel>
+                    <FormLabel component="legend">Set your preferences</FormLabel>
                     <FormGroup row>
                         {this.props.reduxStore.preferencesMaster.map(preference => (
                             <FormControlLabel

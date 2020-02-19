@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import preferencesMaster from './preferencesMaster'
 import searchSaga from './searchSaga'
 import favoriteSaga from './favorites'
+import mealPlanSaga from './mealplan'
 
 
 // rootSaga is the primary saga.
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     userSaga(),
     preferencesMaster(),
     searchSaga(),
-    favoriteSaga()
+    favoriteSaga(),
+    mealPlanSaga()
   ]);
 }

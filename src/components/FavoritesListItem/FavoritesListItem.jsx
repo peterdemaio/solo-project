@@ -25,6 +25,10 @@ import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import { ThemeProvider, MuiThemeProvider } from '@material-ui/core/styles'
 import './FavoritesListItem.css';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 
 function Transition(props) {
@@ -61,49 +65,65 @@ class FavoritesListItem extends React.Component {
     state = {
         expandedOne: false,
         expandedTwo: false,
-        open: false,
+        openRemove: false,
         noteBoolean: true,
-        note: ''
+        note: '',
+        anchorEl: null,
+    };
+
+    menuOpen = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    menuClose = () => {
+        this.setState({ 
+            anchorEl: null,
+            openRemove: false,
+        });
     };
 
     toggleEdit = (event) => {
         this.setState({
-            ...this.state,
             noteBoolean: false
         })
     }
 
-    handleClickOpen = () => {
+    handleClickOpenRemove = () => {
         this.setState({
-            ...this.state,
-            open: true
+            openRemove: true,
         });
     };
 
-    handleCloseYes = (recipe) => {
+    handleCloseDelete = () => {
         this.setState({
-            ...this.state,
-            open: false
+            openRemove: false,
+            anchorEl: null 
         });
         this.delete()
     };
-    handleCloseNo = () => {
+
+    handleCloseAdd = () => {
         this.setState({
-            ...this.state,
-            open: false
+            openRemove: false,
+            anchorEl: null 
+        });
+        this.add()
+    };
+    handleClose = () => {
+        this.setState({
+            anchorEl: null,
+            openRemove: false,
         });
     };
 
     handleExpandOneClick = () => {
         this.setState(state => ({
-            ...this.state,
             expandedOne: !state.expandedOne
         }));
     };
 
     handleExpandTwoClick = () => {
         this.setState(state => ({
-            ...this.state,
             expandedTwo: !state.expandedTwo
         }));
     };
@@ -142,119 +162,143 @@ class FavoritesListItem extends React.Component {
         })
     }
 
+    add = () => {
+        this.props.dispatch({
+            type: 'ADD_TO_MEAL_PLAN',
+            payload: {
+                recipe: this.props.recipe,
+                user: this.props.reduxStore.user.id
+            }
+        })
+    }
+
     render() {
         const { classes } = this.props;
+        const { anchorEl } = this.state;
         return (
-                <li className="recipeListItem">
-                    <Card className={classes.card}>
-                        <CardHeader
-                            color ="primary"
-                            className="cardHeader"
-                            title={this.props.recipe.label}
-                            subheader={this.props.recipe.source}
-                            action={
-                                <IconButton aria-label="Remove from favorites">
-                                    <DeleteIcon onClick={this.handleClickOpen} />
-                                    <Dialog
-                                        open={this.state.open}
-                                        TransitionComponent={Transition}
-                                        keepMounted
-                                        onClose={this.handleClose}
-                                        aria-labelledby="alert-dialog-slide-title"
-                                        aria-describedby="alert-dialog-slide-description"
-                                    >
-                                        <DialogTitle id="alert-dialog-title">{"Remove from favorites?"}</DialogTitle>
-                                        <DialogContent>
-                                            <DialogContentText id="alert-dialog-description">
-                                                This will delete your recipe and all your notes associated with it.
-                                    </DialogContentText>
-                                        </DialogContent>
-                                        <DialogActions>
-                                            <Button variant="contained" onClick={this.handleCloseNo} color="primary">
-                                                Go back
-                                    </Button>
-                                            <Button variant="contained" onClick={this.handleCloseYes} color="secondary" autoFocus>
-                                                Delete
-                                    </Button>
-                                        </DialogActions>
-                                    </Dialog>
+            <li className="recipeListItem">
+                <Card className={classes.card}>
+                    <CardHeader
+                        color="primary"
+                        className="cardHeader"
+                        title={this.props.recipe.label}
+                        subheader={this.props.recipe.source}
+                        action={
+                            <div>
+                                <IconButton
+                                    aria-label="More"
+                                    aria-haspopup="true"
+                                    onClick={this.menuOpen}
+                                >
+                                    <MoreVertIcon />
                                 </IconButton>
-                            }
-                        />
-                        <CardMedia
-                            className={classes.media}
-                            image={this.props.recipe.image}
-                            title={this.props.recipe.label}
-                        />
-                        <CardContent className="cardDescription">
-                            <Typography component="p" className="cardDescription">
-                                Click down arrow to see ingredients list and heart to save to favorites
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={this.menuClose}
+                                >
+                                    <MenuItem onClick={this.add}>Add to Meal Plan</MenuItem>
+                                    <MenuItem onClick={this.handleClickOpenRemove}>Remove From Favorites</MenuItem>
+                                        <Dialog
+                                            open={this.state.openRemove}
+                                            TransitionComponent={Transition}
+                                            keepMounted
+                                            onClose={this.handleClose}
+                                            aria-labelledby="alert-dialog-slide-title"
+                                            aria-describedby="alert-dialog-slide-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title">{"Remove from favorites?"}</DialogTitle>
+                                            <DialogContent>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    This will delete your recipe and all your notes associated with it.
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions>
+                                                <Button variant="contained" onClick={this.handleClose} color="primary">
+                                                    Go back
+                                                </Button>
+                                                <Button variant="contained" onClick={this.handleCloseDelete} color="secondary">
+                                                    Delete
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                </Menu>
+                            </div>
+                        }
+                    />
+                    <CardMedia
+                        className={classes.media}
+                        image={this.props.recipe.image}
+                        title={this.props.recipe.label}
+                    />
+                    <CardContent className="cardDescription">
+                        <Typography component="p" className="cardDescription">
+                            Click down arrow to see ingredients list and heart to save to favorites
                             </Typography>
-                            <Typography>
-                                <Link href={this.props.recipe.url} target="_blank" >
-                                    View recipe on site
+                        <Typography>
+                            <Link href={this.props.recipe.url} target="_blank" >
+                                View recipe on site
                                 </Link>
-                            </Typography>
+                        </Typography>
+                    </CardContent>
+                    <CardActions className={classes.actions} disableActionSpacing>
+                        <h2>Ingredients</h2>
+                        <IconButton
+                            className={classnames(classes.expand, {
+                                [classes.expandOpen]: this.state.expandedOne,
+                            })}
+                            onClick={this.handleExpandOneClick}
+                            aria-expanded={this.state.expandedOne}
+                            aria-label="Show more"
+                        >
+                            <ExpandMoreIcon />
+                        </IconButton>
+                    </CardActions>
+                    <Collapse in={this.state.expandedOne} timeout="auto" unmountOnExit>
+                        <CardContent className="ingredientsList">
+                            <ul>
+                                {this.props.recipe.ingredients.map(item =>
+                                    <li>
+                                        <Typography className="ingredientsListItem">{item}</Typography>
+                                    </li>
+                                )}
+                            </ul>
                         </CardContent>
-                        <CardActions className={classes.actions} disableActionSpacing>
-                            <h2>Ingredients</h2>
-                            <IconButton
-                                className={classnames(classes.expand, {
-                                    [classes.expandOpen]: this.state.expandedOne,
-                                })}
-                                onClick={this.handleExpandOneClick}
-                                aria-expanded={this.state.expandedOne}
-                                aria-label="Show more"
-                            >
-                                <ExpandMoreIcon />
-                            </IconButton>
-                        </CardActions>
-                        <Collapse in={this.state.expandedOne} timeout="auto" unmountOnExit>
-                            <CardContent className="ingredientsList">
-                                <ul>
-                                    {this.props.recipe.ingredients.map(item =>
-                                        <li>
-                                            <Typography className="ingredientsListItem">{item}</Typography>
-                                        </li>
-                                    )}
-                                </ul>
-                            </CardContent>
-                        </Collapse>
-                        <CardActions className={classes.actions} disableActionSpacing>
-                            <h3>Notes</h3>
-                            <IconButton
-                                className={classnames(classes.expand, {
-                                    [classes.expandOpen]: this.state.expandedTwo,
-                                })}
-                                onClick={this.handleExpandTwoClick}
-                                aria-expanded={this.state.expandedTwo}
-                                aria-label="Show more"
-                            >
-                                <ExpandMoreIcon />
-                            </IconButton>
-                        </CardActions>
-                        <Collapse in={this.state.expandedTwo} timeout="auto" unmountOnExit>
-                            <CardContent className="notesSection">
-                                {this.state.noteBoolean === true ?
-                                    <div>
-                                        <p>{this.props.recipe.notes}</p>
-                                        <IconButton>
-                                            <EditIcon onClick={this.toggleEdit} />
-                                        </IconButton>
-                                    </div> :
-                                    <div>
-                                        <p><textarea className="notesTextArea" onChange={(event) => this.setNote(event)} defaultValue={this.props.recipe.notes} /></p>
-                                        <IconButton>
-                                            <CheckIcon onClick={(event) => this.saveNote(event, this.props.recipe.id)} />
-                                        </IconButton>
-
-                                        {/* <Button onClick={(event) => this.saveNote(event, this.props.recipe.id)} /> */}
-                                    </div>
-                                }
-                            </CardContent>
-                        </Collapse>
-                    </Card>
-                </li>
+                    </Collapse>
+                    <CardActions className={classes.actions} disableActionSpacing>
+                        <h3>Notes</h3>
+                        <IconButton
+                            className={classnames(classes.expand, {
+                                [classes.expandOpen]: this.state.expandedTwo,
+                            })}
+                            onClick={this.handleExpandTwoClick}
+                            aria-expanded={this.state.expandedTwo}
+                            aria-label="Show more"
+                        >
+                            <ExpandMoreIcon />
+                        </IconButton>
+                    </CardActions>
+                    <Collapse in={this.state.expandedTwo} timeout="auto" unmountOnExit>
+                        <CardContent className="notesSection">
+                            {this.state.noteBoolean === true ?
+                                <div>
+                                    <p>{this.props.recipe.notes}</p>
+                                    <IconButton>
+                                        <EditIcon onClick={this.toggleEdit} />
+                                    </IconButton>
+                                </div> :
+                                <div>
+                                    <p><textarea className="notesTextArea" onChange={(event) => this.setNote(event)} defaultValue={this.props.recipe.notes} /></p>
+                                    <IconButton>
+                                        <CheckIcon onClick={(event) => this.saveNote(event, this.props.recipe.id)} />
+                                    </IconButton>
+                                </div>
+                            }
+                        </CardContent>
+                    </Collapse>
+                </Card>
+            </li>
         )
     }
 }

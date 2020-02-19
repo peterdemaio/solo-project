@@ -11,7 +11,6 @@ router.get('/:id', (req, res) => {
                         ORDER BY "health".name ASC;`;
     pool.query(queryText, [id])
         .then(result => {
-            console.log(result.rows)
             res.send(result.rows);
         })
         .catch((e) => {
@@ -21,7 +20,6 @@ router.get('/:id', (req, res) => {
 })
 
 router.put('/', (req, res) => {
-    console.log('in put route with:', req.body)
     food_id = req.body.food_id
     user_id = req.body.user_id
     const queryText = `UPDATE user_health SET status = NOT status WHERE user_id = $1 AND health_id = $2 RETURNING user_id;`

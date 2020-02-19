@@ -13,7 +13,7 @@ const userRouter = require('./routes/user.router');
 const preferencesRouter = require('./routes/preferences.router')
 const search = require('./routes/search.router')
 const favorites = require('./routes/favorites.router')
-
+const mealplan = require('./routes/mealplan.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/preferences', preferencesRouter)
 app.use('/search', search)
 app.use('/favorites', favorites)
+app.use('/mealplan', mealplan)
 
 // Serve static files
 app.use(express.static('build'));

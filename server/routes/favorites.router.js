@@ -21,7 +21,6 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    console.log('in favorites get route with:', req.query.id)
     let id = req.query.id
     let sqlText = `SELECT * FROM favorites WHERE "user_id" = $1 ORDER BY "id"`
     pool.query(sqlText, [id])
@@ -36,7 +35,6 @@ router.get('/', (req, res) => {
 })
 
 router.delete('/:food_id', (req, res) => {
-    console.log('ready to delete book', req.params)
     let id = req.params.food_id
     let sqlText = `DELETE from "favorites" WHERE id = $1`
     pool.query(sqlText, [id])
@@ -50,7 +48,6 @@ router.delete('/:food_id', (req, res) => {
 })
 
 router.put('/', (req, res) => {
-    console.log('ready to update the note', req.body )
     let food_id = req.body.food_id
     let note = req.body.note
     let sqlText = `UPDATE "favorites" SET "notes" = $1 WHERE "id" = $2;`
@@ -61,6 +58,5 @@ router.put('/', (req, res) => {
             res.sendStatus(500);
         })
 })
-
 
 module.exports = router;
