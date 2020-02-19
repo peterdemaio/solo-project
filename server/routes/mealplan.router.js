@@ -15,4 +15,19 @@ router.post('/', (req, res) => {
     })
 })
 
+router.get('/', (req, res) => {
+    let id = req.query.id
+    let sqlText = `SELECT "meal_plan".id, "favorites".label, "favorites".url, "favorites".image, "favorites".ingredients, "favorites".source, "favorites".notes from "meal_plan" 
+    JOIN "favorites" on "meal_plan".fav_id = "favorites".id
+    WHERE "meal_plan".user_id = $1`;
+    pool.query(sqlText, [id])
+    .then((result) => {
+        res.send(result.rows)
+    })
+    .catch((err) => {
+        res.sendStatus(500)
+        console.log(err)
+    })
+})
+
 module.exports = router;

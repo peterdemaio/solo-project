@@ -6,6 +6,7 @@ import preferencesMaster from './preferencesMaster'
 import searchReducer from './searchReducer'
 import favorites from './favorites'
 import spinner from './spinnerReducer'
+import mealPlan from './mealplan'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   preferencesMaster, // This is the list of 12 preferences from the database users can select from
   searchReducer,
   favorites,
-  spinner
+  spinner,
+  mealPlan
 });
 
 export default rootReducer;

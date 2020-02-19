@@ -23,11 +23,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
-import { ThemeProvider, MuiThemeProvider } from '@material-ui/core/styles'
-import './FavoritesListItem.css';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -74,7 +70,7 @@ class FavoritesListItem extends React.Component {
     };
 
     menuClose = () => {
-        this.setState({ 
+        this.setState({
             anchorEl: null,
             openRemove: false,
         });
@@ -95,7 +91,7 @@ class FavoritesListItem extends React.Component {
     handleCloseDelete = () => {
         this.setState({
             openRemove: false,
-            anchorEl: null 
+            anchorEl: null
         });
         this.delete()
     };
@@ -103,7 +99,7 @@ class FavoritesListItem extends React.Component {
     handleCloseAdd = () => {
         this.setState({
             openRemove: false,
-            anchorEl: null 
+            anchorEl: null
         });
         this.add()
     };
@@ -160,16 +156,6 @@ class FavoritesListItem extends React.Component {
         })
     }
 
-    add = () => {
-        this.props.dispatch({
-            type: 'ADD_TO_MEAL_PLAN',
-            payload: {
-                recipe: this.props.recipe,
-                user: this.props.reduxStore.user.id
-            }
-        })
-    }
-
     render() {
         const { classes } = this.props;
         const { anchorEl } = this.state;
@@ -179,63 +165,45 @@ class FavoritesListItem extends React.Component {
                     <CardHeader
                         color="primary"
                         className="cardHeader"
-                        title={this.props.recipe.label}
-                        subheader={this.props.recipe.source}
+                        title={this.props.meal.label}
+                        subheader={this.props.meal.source}
                         action={
                             <div>
-                                <IconButton
-                                    aria-label="More"
-                                    aria-haspopup="true"
-                                    onClick={this.menuOpen}
-                                >
-                                    <MoreVertIcon />
+                                <IconButton className={classes.button} aria-label="Delete">
+                                    <DeleteIcon />
                                 </IconButton>
-                                <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    open={Boolean(anchorEl)}
-                                    onClose={this.menuClose}
-                                >
-                                    <MenuItem onClick={this.add}>Add to Meal Plan</MenuItem>
-                                    <MenuItem onClick={this.handleClickOpenRemove}>Remove From Favorites</MenuItem>
-                                        <Dialog
-                                            open={this.state.openRemove}
-                                            TransitionComponent={Transition}
-                                            keepMounted
-                                            onClose={this.handleClose}
-                                            aria-labelledby="alert-dialog-slide-title"
-                                            aria-describedby="alert-dialog-slide-description"
-                                        >
-                                            <DialogTitle id="alert-dialog-title">{"Remove from favorites?"}</DialogTitle>
-                                            <DialogContent>
-                                                <DialogContentText id="alert-dialog-description">
-                                                    This will delete your recipe and all your notes associated with it.
-                                                </DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button variant="contained" onClick={this.handleClose} color="primary">
-                                                    Go back
+                                    <Dialog
+                                        open={this.state.openRemove}
+                                        TransitionComponent={Transition}
+                                        keepMounted
+                                        onClose={this.handleClose}
+                                        aria-labelledby="alert-dialog-slide-title"
+                                        aria-describedby="alert-dialog-slide-description"
+                                    >
+                                        <DialogTitle id="alert-dialog-title">{"Remove from meal plan?"}</DialogTitle>
+                                        <DialogActions>
+                                            <Button variant="contained" onClick={this.handleClose} color="primary">
+                                                Go back
                                                 </Button>
-                                                <Button variant="contained" onClick={this.handleCloseDelete} color="secondary">
-                                                    Delete
+                                            <Button variant="contained" onClick={this.handleCloseDelete} color="secondary">
+                                                Delete
                                                 </Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                </Menu>
+                                        </DialogActions>
+                                    </Dialog>
                             </div>
                         }
                     />
                     <CardMedia
                         className={classes.media}
-                        image={this.props.recipe.image}
-                        title={this.props.recipe.label}
+                        image={this.props.meal.image}
+                        title={this.props.meal.label}
                     />
                     <CardContent className="cardDescription">
                         <Typography component="p" className="cardDescription">
                             Click down arrow to see ingredients list and heart to save to favorites
                             </Typography>
                         <Typography>
-                            <Link href={this.props.recipe.url} target="_blank" >
+                            <Link href={this.props.meal.url} target="_blank" >
                                 View recipe on site
                                 </Link>
                         </Typography>
@@ -256,7 +224,7 @@ class FavoritesListItem extends React.Component {
                     <Collapse in={this.state.expandedOne} timeout="auto" unmountOnExit>
                         <CardContent className="ingredientsList">
                             <ul>
-                                {this.props.recipe.ingredients.map(item =>
+                                {this.props.meal.ingredients.map(item =>
                                     <li>
                                         <Typography className="ingredientsListItem">{item}</Typography>
                                     </li>
@@ -281,7 +249,7 @@ class FavoritesListItem extends React.Component {
                         <CardContent className="notesSection">
                             {this.state.noteBoolean === true ?
                                 <div>
-                                    <p>{this.props.recipe.notes}</p>
+                                    <p>{this.props.meal.notes}</p>
                                     <IconButton>
                                         <EditIcon onClick={this.toggleEdit} />
                                     </IconButton>
@@ -289,7 +257,7 @@ class FavoritesListItem extends React.Component {
                                 <div>
                                     <p><textarea className="notesTextArea" onChange={(event) => this.setNote(event)} defaultValue={this.props.recipe.notes} /></p>
                                     <IconButton>
-                                        <CheckIcon onClick={(event) => this.saveNote(event, this.props.recipe.id)} />
+                                        <CheckIcon onClick={(event) => this.saveNote(event, this.props.meal.id)} />
                                     </IconButton>
                                 </div>
                             }

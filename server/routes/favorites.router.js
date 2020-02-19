@@ -26,7 +26,6 @@ router.get('/', (req, res) => {
     pool.query(sqlText, [id])
     .then((result) => {
         res.send(result.rows)
-        console.log(result.rows)
     })
     .catch((e) =>{
         console.log(e)
