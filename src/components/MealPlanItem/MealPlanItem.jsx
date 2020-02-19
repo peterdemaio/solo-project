@@ -96,13 +96,6 @@ class FavoritesListItem extends React.Component {
         this.delete()
     };
 
-    handleCloseAdd = () => {
-        this.setState({
-            openRemove: false,
-            anchorEl: null
-        });
-        this.add()
-    };
     handleClose = () => {
         this.setState({
             anchorEl: null,
@@ -148,9 +141,9 @@ class FavoritesListItem extends React.Component {
 
     delete = () => {
         this.props.dispatch({
-            type: 'DELETE_FAVORITE',
+            type: 'DELETE_MEAL_PLAN',
             payload: {
-                recipe: this.props.recipe,
+                recipe: this.props.meal,
                 user: this.props.reduxStore.user.id
             }
         })
@@ -158,7 +151,6 @@ class FavoritesListItem extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const { anchorEl } = this.state;
         return (
             <li className="recipeListItem">
                 <Card className={classes.card}>
@@ -169,27 +161,32 @@ class FavoritesListItem extends React.Component {
                         subheader={this.props.meal.source}
                         action={
                             <div>
-                                <IconButton className={classes.button} aria-label="Delete">
+                                <IconButton className={classes.button} aria-label="Delete" onClick={this.handleClickOpenRemove}>
                                     <DeleteIcon />
                                 </IconButton>
-                                    <Dialog
-                                        open={this.state.openRemove}
-                                        TransitionComponent={Transition}
-                                        keepMounted
-                                        onClose={this.handleClose}
-                                        aria-labelledby="alert-dialog-slide-title"
-                                        aria-describedby="alert-dialog-slide-description"
-                                    >
-                                        <DialogTitle id="alert-dialog-title">{"Remove from meal plan?"}</DialogTitle>
-                                        <DialogActions>
-                                            <Button variant="contained" onClick={this.handleClose} color="primary">
-                                                Go back
+                                <Dialog
+                                    open={this.state.openRemove}
+                                    TransitionComponent={Transition}
+                                    keepMounted
+                                    onClose={this.handleClose}
+                                    aria-labelledby="alert-dialog-slide-title"
+                                    aria-describedby="alert-dialog-slide-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">{"Remove from meal plan?"}</DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                            Note: this recipe will still remain in your favorites
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button variant="contained" onClick={this.handleClose} color="primary">
+                                            Go back
                                                 </Button>
-                                            <Button variant="contained" onClick={this.handleCloseDelete} color="secondary">
-                                                Delete
+                                        <Button variant="contained" onClick={this.handleCloseDelete} color="secondary">
+                                            Remove
                                                 </Button>
-                                        </DialogActions>
-                                    </Dialog>
+                                    </DialogActions>
+                                </Dialog>
                             </div>
                         }
                     />
