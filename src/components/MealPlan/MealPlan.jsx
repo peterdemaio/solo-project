@@ -39,13 +39,13 @@ class mealPlan extends React.Component {
       groceryList.push(...item.ingredients)
     }
     console.log(groceryList, this.props.reduxStore.user.id)
-    // this.props.dispatch({
-    //   type: 'MAKE_GROCERY_LIST',
-    //   payload: {
-    //     groceryList: groceryList,
-    //     user_id: this.props.reduxStore.user.id
-    //   }
-    // })
+    this.props.dispatch({
+      type: 'MAKE_GROCERY_LIST',
+      payload: {
+        groceryList: groceryList,
+        user_id: this.props.reduxStore.user.id
+      }
+    })
   }
 
   componentDidMount() {

@@ -7,6 +7,7 @@ import searchReducer from './searchReducer'
 import favorites from './favorites'
 import spinner from './spinnerReducer'
 import mealPlan from './mealplan'
+import groceryList from './grocerylist'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   searchReducer,
   favorites,
   spinner,
-  mealPlan
+  mealPlan,
+  groceryList
 });
 
 export default rootReducer;

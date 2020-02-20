@@ -14,6 +14,7 @@ import UserPage from '../UserPage/UserPage';
 import Search from '../SearchPage/SearchPage'
 import Favorites from '../Favorites/Favorites'
 import MealPlan from '../MealPlan/MealPlan'
+import GroceryList from '../GroceryList/GroceryList'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import blue from '@material-ui/core/colors/blue'
@@ -46,6 +47,10 @@ class App extends Component {
     return (
         <Router>
           <div>
+            {/* // nav.js.maxwidth < 430px ?
+            // render navmobile.js :
+            // render nav.js */}
+          }
             <Nav />
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -82,6 +87,11 @@ class App extends Component {
                 exact
                 path="/favorites"
                 component={Favorites}
+              />
+              <ProtectedRoute
+                exact
+                path="/grocerylist"
+                component={GroceryList}
               />
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <div><h1>404 -Page Not found</h1><img src="https://www.holidaycat.cz/wp-content/uploads/2015/06/Cat-Chewing-Cord.jpg" alt="Maybe a cat chewed our wires" /></div>} />

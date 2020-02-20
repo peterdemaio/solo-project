@@ -31,7 +31,7 @@ function Transition(props) {
 
 const styles = theme => ({
     card: {
-        maxWidth: 600,
+        maxWidth: 650,
         maxHeight: 650,
         overflow: 'auto',
     },
@@ -247,14 +247,14 @@ class FavoritesListItem extends React.Component {
                             {this.state.noteBoolean === true ?
                                 <div>
                                     <p>{this.props.meal.notes}</p>
-                                    <IconButton>
-                                        <EditIcon onClick={this.toggleEdit} />
+                                    <IconButton onClick={this.toggleEdit}>
+                                        <EditIcon />
                                     </IconButton>
                                 </div> :
                                 <div>
-                                    <p><textarea className="notesTextArea" onChange={(event) => this.setNote(event)} defaultValue={this.props.recipe.notes} /></p>
-                                    <IconButton>
-                                        <CheckIcon onClick={(event) => this.saveNote(event, this.props.meal.id)} />
+                                    <p><textarea className="notesTextArea" onChange={(event) => this.setNote(event)} defaultValue={this.props.meal.notes} /></p>
+                                    <IconButton onClick={(event) => this.saveNote(event, this.props.meal.id)} >
+                                        <CheckIcon />
                                     </IconButton>
                                 </div>
                             }

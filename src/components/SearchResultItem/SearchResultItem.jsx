@@ -31,6 +31,7 @@ const styles = theme => ({
     card: {
         maxWidth: 600,
         maxHeight: 650,
+        minWidth: 340,
         overflow: 'auto'
     },
     media: {
@@ -181,6 +182,4 @@ const mapStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-let styledViewCard = withStyles(styles)(SearchResultsItem);
-
-export default connect(mapStateToProps)(styledViewCard)
+export default connect(mapStateToProps)(withStyles(styles)(SearchResultsItem));

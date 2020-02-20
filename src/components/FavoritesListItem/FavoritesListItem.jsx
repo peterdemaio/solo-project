@@ -36,6 +36,7 @@ function Transition(props) {
 const styles = theme => ({
     card: {
         maxWidth: 600,
+        minWidth: 340,
         maxHeight: 650,
         overflow: 'auto',
     },

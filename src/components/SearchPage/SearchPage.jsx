@@ -10,7 +10,6 @@ class Search extends Component {
 
     state = {
         queryText: '',
-        loading : false
     }
 
     handleSearch = (event) => {
@@ -45,7 +44,7 @@ class Search extends Component {
                 <Button className="button" onClick={this.handleClick}>SEARCH</Button>
                 { this.props.reduxStore.spinner === true ? 
                 <div className='loading'>
-                    <p>LOADING</p>
+                    <p>LOADING nom, nom, nom</p>
                 <PacmanLoader
                     color={'#c7a600 '}
                     loading={true}

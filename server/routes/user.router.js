@@ -12,6 +12,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.post('/preferences', (req, res) => {
+  console.log('ready to set the default preferences for', req.body)
+  let id = req.body.id
+  let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  let queryText = ''
+  let promises = []
+  // Add post route here using join table for user and preferences
+  for (let item of array) {
+      queryText = 'INSERT INTO "user_health" ("user_id", "health_id", "status") VALUES ($1, $2, $3)'
+      let promise = pool.query(queryText, [id, item, false])
+      promises.push(promise)
+  }
+  return Promise.all(promises)
+      .then(() => {
+          res.sendStatus(200)
+      })
+      .catch((err) => {
+          console.log(err)
+          res.sendStatus(500)
+      })
+})
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
@@ -28,21 +50,6 @@ router.post('/register', (req, res, next) => {
     })
     .catch(() => res.sendStatus(500));
 });
-
-router.post('/preferences', (req, res) => {
-  console.log('ready to set the default preferences for', req.body)
-let id = req.body.id
-let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-let queryText = ''
-// Add post route here using join table for user and preferences
-for (let item of array) {
-queryText = 'INSERT INTO "user_health" ("user_id", "health_id", "status") VALUES ($1, $2, $3)'
-pool.query(queryText, [id, item, false])
-.then( () => res.sendStatus(201))
-.catch(() => res.sendStatus(500))
-}
-
-})
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
