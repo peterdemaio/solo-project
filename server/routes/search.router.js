@@ -5,8 +5,7 @@ const axios = require('axios');
 
 router.get('/', (req, res) => {
     console.log('ready to search with', req.query)
-    axios.get(`https://api.edamam.com/search?app_id=3ebdd50e&app_key=87f9f71458891eac2d73c6ce7a07f4b4&q=${req.query.q}${req.query.health}`)
-    //axios.get('https://api.edamam.com/search?app_id=3ebdd50e&app_key=87f9f71458891eac2d73c6ce7a07f4b4&q=soup&health=vegan')
+    axios.get(`https://api.edamam.com/search?app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}&q=${req.query.q}${req.query.health}`)
     .then( response => {
         res.send(response.data)
     })
