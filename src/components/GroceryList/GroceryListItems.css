@@ -1,0 +1,19 @@
+.groceryListItem:nth-child(even) {
+    background: white;
+    border: 1px solid black;
+    
+}
+
+.groceryListItem:nth-child(odd) {
+    background: lightgray;
+    border: 1px solid black;
+}
+
+.groceryList:nth-child(odd) {
+    background: white;
+    margin: 10%
+}
+
+.checked {
+    text-decoration: line-through;
+}

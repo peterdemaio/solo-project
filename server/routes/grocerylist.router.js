@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     let id = req.query.id
     console.log('getting grocery list for id:', id)
-    const queryText = `SELECT * FROM "grocery_list" WHERE user_id = $1;`;
+    const queryText = `SELECT * FROM "grocery_list" WHERE user_id = $1 ORDER BY "id" DESC;`;
     pool.query(queryText, [id])
         .then(result => { res.send(result.rows) })
         .catch((e) => {
@@ -36,7 +36,14 @@ router.get('/', (req, res) => {
 })
 
 router.put('/', (req, res) => {
-    console.log('in router put route')
+    console.log('in router put route with id:', req.body.id)
+    let id = req.body.id
+    let sqlText = `UPDATE "grocery_list" SET "checked" = NOT "checked" WHERE "id" = $1;`
+    pool.query(sqlText, [id])
+    .then(() => {res.sendStatus(201)})
+    .catch((err) => {
+        res.sendStatus(500)
+    })
 })
 
 router.delete('/:id', (req, res) => {

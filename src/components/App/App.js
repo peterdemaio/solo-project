@@ -14,7 +14,7 @@ import UserPage from '../UserPage/UserPage';
 import Search from '../SearchPage/SearchPage'
 import Favorites from '../Favorites/Favorites'
 import MealPlan from '../MealPlan/MealPlan'
-import GroceryList from '../GroceryList/GroceryList'
+import GroceryList from '../GroceryListPage/GroceryListPage'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import blue from '@material-ui/core/colors/blue'
@@ -41,6 +41,7 @@ class App extends Component {
   componentDidMount() {
     console.log('page loaded, the user id is:', this.props.reduxStore.user.id)
     this.props.dispatch({ type: 'FETCH_USER' })
+    
   }
 
   render() {
@@ -50,7 +51,6 @@ class App extends Component {
             {/* // nav.js.maxwidth < 430px ?
             // render navmobile.js :
             // render nav.js */}
-          }
             <Nav />
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}

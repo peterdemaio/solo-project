@@ -1,5 +1,5 @@
 footer {
     margin-top: 80px;
     display: flex;
-    float: right;
+    justify-content: space-between;
 }
