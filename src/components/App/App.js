@@ -96,7 +96,7 @@ class App extends Component {
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <div><h1>404 -Page Not found</h1><img src="https://www.holidaycat.cz/wp-content/uploads/2015/06/Cat-Chewing-Cord.jpg" alt="Maybe a cat chewed our wires" /></div>} />
             </Switch>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </Router>
     )

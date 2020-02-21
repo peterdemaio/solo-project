@@ -6,6 +6,7 @@ import './Nav.css';
 
 const Nav = (props) => (
   <div className="nav">
+    <div id="edamam-badge" data-color="transparent" className="badge"></div>
     <Link to="/home">
       <h2 className="nav-title">It could be tacos</h2>
     </Link>

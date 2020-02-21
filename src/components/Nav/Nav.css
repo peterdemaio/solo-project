@@ -47,3 +47,8 @@
   float: right;
   overflow: auto;
 }
+
+.badge {
+  display: flex;
+  float: right;
+}
