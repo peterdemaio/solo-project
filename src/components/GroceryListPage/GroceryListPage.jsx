@@ -6,6 +6,12 @@ import './GroceryList.css'
 
   class groceryListPage extends Component {
     render() {
+
+      // <form onSubmit= {this.handleClick}>
+      //           <label> Add Item </label>
+      //           <input value ={this.state.newItem} onChange = {(event) => this.handleChangeFor(event)}/>
+      //           <input type= "submit" onClick = {this.handleClick}/>
+      //       </form>
       return (
         <div className="groceryList">
           <h2>Grocery List</h2>

@@ -1,5 +1,5 @@
 .nav-title {
-    font-size: 54px;
+    font-size: 44px;
     font-weight: 700;
     float: left;
     color: black;
@@ -46,9 +46,4 @@
 .nav-right {
   float: right;
   overflow: auto;
-}
-
-.badge {
-  display: flex;
-  float: right;
 }
