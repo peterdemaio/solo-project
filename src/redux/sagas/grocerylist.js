@@ -5,7 +5,15 @@ function* groceryListSaga() {
 yield takeEvery ('MAKE_GROCERY_LIST', makeGroceryList);
 yield takeEvery ('GET_GROCERY_LIST', getGroceryList);
 yield takeEvery ('DELETE_GROCERY_ITEM', deleteGroceryItem)
-yield takeEvery ('EDIT_GROCERY_ITEM', editGroceryItem)
+yield takeEvery ('EDIT_GROCERY_ITEM', editGroceryItem);
+yield takeEvery ('POST_GROCERY_ITEM', postGroceryItem)
+}
+
+function* postGroceryItem(action) {
+    console.log('ready to post item', action.payload)
+    let user_id = action.payload.user
+    let response = yield axios.post('/grocerylist/item', action.payload)
+    yield put ({ type: 'GET_GROCERY_LIST', payload: user_id })
 }
 
 function* deleteGroceryItem(action) {
