@@ -2,6 +2,21 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
+router.post('/item', (req, res) => {
+    console.log(req.body)
+    let item = req.body.newItem
+    let user = req.body.user
+    let sqlText = `INSERT INTO "grocery_list" ("user_id", "item", "checked")
+                    VALUES ($1, $2, $3)`
+    pool.query(sqlText, [user, item, false])  
+    .then(() => res.sendStatus(201))    
+    .catch((err) => {
+        res.sendStatus(500)
+        console.log(err)
+    })         
+})
+
 router.post('/', (req, res) => {
     let groceryList = req.body.list
     let id = req.body.id
