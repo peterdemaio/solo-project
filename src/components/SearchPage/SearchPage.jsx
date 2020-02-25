@@ -41,7 +41,7 @@ class Search extends Component {
                 <Preferences className="preferences"/>
                 <br></br>
                 <Input placeholder="Search for a recipe" value={this.state.queryText} onChange={(event) => this.handleSearch(event)}></Input>
-                <Button className="button" onClick={this.handleClick}>SEARCH</Button>
+                <Button className="button" variant="contained" onClick={this.handleClick}>SEARCH</Button>
                 { this.props.reduxStore.spinner === true ? 
                 <div className='loading'>
                     <p>LOADING nom, nom, nom</p>

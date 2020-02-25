@@ -26,16 +26,19 @@ handleClick = (event) => {
           user: this.props.reduxStore.user.id
         }
     })
+    this.setState ({
+      newItem: ''
+    })
 }
   render() {
     return (
       <div className="submitGrocery">
         <br></br>
-        <h3>ADD NEW ITEM:</h3>
+        <h2>ADD NEW ITEM:</h2>
           <input value={this.state.newItem} onChange={(event) => this.handleChangeFor(event)} />
           <Button onClick={this.handleClick} color="primary" variant="contained"> ADD ITEM</Button>
-        <div className="groceryList">
           <h2>Grocery List</h2>
+        <div className="groceryList">
           <GroceryListItems />
         </div>
       </div>
