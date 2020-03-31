@@ -233,7 +233,7 @@ class FavoritesListItem extends React.Component {
                     />
                     <CardContent className="cardDescription">
                         <Typography component="p" className="cardDescription">
-                            Click down arrow to see ingredients list and heart to save to favorites
+                            Click down arrow to see ingredients list and notes.
                             </Typography>
                         <Typography>
                             <Link href={this.props.recipe.url} target="_blank" >

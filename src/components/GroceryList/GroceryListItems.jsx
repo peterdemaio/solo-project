@@ -4,8 +4,7 @@ import {
   ListItem,
   ListItemText,
   IconButton,
-  ListItemSecondaryAction,
-  Icon
+  ListItemSecondaryAction
 } from "@material-ui/core"
 import RootRef from "@material-ui/core/RootRef";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -85,7 +84,7 @@ class groceryListItems extends Component {
                     <Draggable key={food.id} draggableId={food.id.toString()} index={index}>
                       {(provided, snapshot) => (
                         <ListItem
-                        className="groceryListItem"
+                          className="groceryListItem"
                           ContainerComponent="li"
                           ContainerProps={{ ref: provided.innerRef }}
                           {...provided.draggableProps}
@@ -97,7 +96,7 @@ class groceryListItems extends Component {
 
                         >
                           <ListItemText
-                            primary={food.item} 
+                            primary={food.item}
                             className={food.checked === true ? "checked" : "notChecked"}
                           />
                           <ListItemSecondaryAction>

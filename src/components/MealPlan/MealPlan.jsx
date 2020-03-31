@@ -53,14 +53,24 @@ class mealPlan extends React.Component {
   }
 
   render() {
+    let displayText
+
+    if (this.props.reduxStore.mealPlan.length === 0) {
+      displayText = <h1 className="container">You have no items in your meal plan! Add items from your favorites page to your search page!</h1>
+    } else {
+      displayText =
+        <>
+          <Button variant="contained" onClick={this.groceryList} color="primary">Generate Grocery List</Button>
+          <ul>
+            {this.props.reduxStore.mealPlan.map(meal =>
+              <MealPlanItem key={meal.id} meal={meal} />
+            )}
+          </ul>
+        </>
+    }
     return (
       <div>
-        <Button variant="contained" onClick={this.groceryList} color="primary">Generate Grocery List</Button>
-        <ul>
-          {this.props.reduxStore.mealPlan.map(meal =>
-            <MealPlanItem key={meal.id} meal={meal} />
-          )}
-        </ul>
+        {displayText}
       </div>
     )
   }

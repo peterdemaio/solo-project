@@ -18,12 +18,12 @@ class Favorites extends Component {
     note: ''
   }
 
- toggleEdit = (event) => {
+  toggleEdit = (event) => {
     this.setState({
       ...this.state,
       noteBoolean: false
     })
- }
+  }
 
   setNote = (event) => {
     this.setState({
@@ -32,8 +32,8 @@ class Favorites extends Component {
 
     })
   }
- 
- 
+
+
   saveNote = (event, id) => {
     this.setState({
       ...this.state,
@@ -47,13 +47,21 @@ class Favorites extends Component {
         user_id: this.props.reduxStore.user.id
       }
     })
-    
+
   }
 
   render() {
+    let displayText
+
+    if (this.props.reduxStore.favorites.length === 0) {
+      displayText = <h1 className="container">There are no favorites to display! Use the search feature to find some great recipes!</h1>
+    } else {
+      displayText =
+        <FavoritesList />
+    }
     return (
       <div>
-        <FavoritesList />
+        {displayText}
       </div>
     )
   }
