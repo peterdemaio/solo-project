@@ -7,7 +7,9 @@ import { connect } from "react-redux";
 const UserPage = props =>
   <div className="container">
     <h1 className="welcome">Welcome to It Could Be Tacos!</h1>
-    <p>This app </p>
+    <p>This app has everything you need for finding your new favorite recipes, adding notes to recipe cards like your grandmother used to in her old recipe books,
+    planning your meals for the week, and finding all the ingredients you need in the grocery store! To get started, click the search button, edit your dietary needs
+      at the top and search for whatever sounds good to you!  </p>
     {/* <LogOutButton className="log-in" /> */}
   </div>;
 
