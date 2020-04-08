@@ -73,6 +73,14 @@ input {
     margin-left: auto;
 }
 
+.container-sm {
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 .button {
     background-color: white; 
     color: black; 
