@@ -11,18 +11,18 @@ _Duration: 2 week sprint_
 When users search for new recipes, they can filter them based on dietary preferences, chosing from 10 fields at the top of the page. Users can "favorite" a recipe by clicking on the heart. This will add the recipe to the users Favorites tab. From the favorites tab, users can view the recipe and open popups to view the ingredients and notes tabs. The notes can be edited to allow the user to record anything about the recipe they like or don't like. The recipes can then be added to the meal plan which is a smaller list of recipes the user will make, for example, for an upcoming party or the next week's meals. On the meal plan page users can again edit the notes of the recipe, remove items from the meal plan or generate a grocery list from all of the ingredients in the meal plan. On the grocery list view, which is optimized for mobile, users can add other items to the list, reorganize items according to where they are in the store, cross off items as they are put in the cart, or delete items completely from the list.
 
 ### SCREENSHOT
-Homepage, user clicks on a movie poster
-![screenshot1](public/images/Screenshot1.png)
+Search Page where a user search and filter out recipes according to dietary needs.
+![screenshot1](public/images/screenshot1.png)
 
-User is brought to the descriptions page where genres are now displayed
+Favorites page where a user can see previously saved recipes, edit recipes and create a meal plan for the week
 
 ![screenshot2](public/images/screenshot2.png)
 
-User can edit title and description
+Meal plan page where users can select which recipes they'd like to use for the automatically generated meal plan.
 
 ![screenshot3](public/images/screenshot3.png)
 
-Details are updated back on the homepage
+Grocery list (optimized for mobile), which is automatically generated on the meal plan page and where users can also add and remove items.
 
 ![screenshot4](public/images/screenshot4.png)
 
@@ -38,7 +38,7 @@ Go to localhost:5000 in your browser to view the homepage.
 
 ### Usage
 
-Users must know to click on a movie poster to update it. Beyond that, the website is very intuitive with go back, cancel, edit and save buttons, as well as textareas that are pre-filled with the existing data. 
+Users can search for recipes using the Edamam API and filtering by preference or allergen at the top of the page. The search results can then be favorited by clicking on the heart. These favorites are then seen on the "favorites" tab, where they can also be edited, deleted from the favorites, or saved into the meal plan list. The meal plan list operates similar to the favorites, but from here users can generate a grocery list. The grocery list can be added to, deleted, and edited by crossing items off. 
 
 ### Acknowledgement
 
