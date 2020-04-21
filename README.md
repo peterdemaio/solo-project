@@ -12,19 +12,20 @@ When users search for new recipes, they can filter them based on dietary prefere
 
 ### SCREENSHOT
 Search Page where a user search and filter out recipes according to dietary needs.
-![screenshot1](public/images/screenshot1.png)
+
+<image src="public/screenshot1.png" width=1000>
 
 Favorites page where a user can see previously saved recipes, edit recipes and create a meal plan for the week
 
-![screenshot2](public/images/screenshot2.png)
+<image src="public/screenshot2.png" width=1000>
 
 Meal plan page where users can select which recipes they'd like to use for the automatically generated meal plan.
 
-![screenshot3](public/images/screenshot3.png)
+<image src="public/screenshot3.png" width=1000>
 
 Grocery list (optimized for mobile), which is automatically generated on the meal plan page and where users can also add and remove items.
 
-![screenshot4](public/images/screenshot4.png)
+<image src="public/screenshot4.png" width=1000>
 
 ### Prerequisites
 
